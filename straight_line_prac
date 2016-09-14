@@ -1,0 +1,47 @@
+%Straight line model for MCMC practice
+%Create a straight line with known b & m, add noise, MCMC, find b & m 
+
+%Create a straight line
+b = 3; m = 4;
+x = [0:1:10];
+y=m*x+b;
+figure;
+plot(x,y)
+title('without noise')
+savefig('without_noise')
+
+%add noise to the line
+t = awgn(x,6); %6 is SNR I picked for no reason, awgn = assign white Gaussian noise
+figure; 
+plot(t)
+title('with noise')
+savefig('with_noise')
+
+%load the new y values from the figure with noise
+%data = load('with_noise.fig', '-mat');
+%h = gcf %returns the handle of the current figure
+%axesObjs = get(h, 'Children');  %axes handles
+%dataObjs = get(axesObjs, 'Children'); %handles to low-level graphics objects in axes
+%objTypes = get(dataObjs, 'Type');  %type of low-level graphics object
+%ydata = get(dataObjs, 'YData');
+
+data = load('with_noise.fig', '-mat');
+ydata = [0.691123150861556,0.469653563820321,1.76513585327354,2.86344181052984,4.55051639558769,...
+    4.86073413470350,6.35160362269170,5.97165586473619,7.82265489849642,8.58722894780394,9.20959915347081]
+Y0 = ydata(1)
+Y1 = ydata(2)
+Y2 = ydata(3)
+Y3 = ydata(4)
+Y4 = ydata(5)
+Y5 = ydata(6)
+Y6 = ydata(7)
+Y7 = ydata(8)
+Y8 = ydata(9)
+Y9 = ydata(10)
+Y10=ydata(11)
+
+save('line_inputs')
+
+%LIKELIHOOD=zeros(10,1);
+%MCMCnum=400
+%loglike = normpdf(
